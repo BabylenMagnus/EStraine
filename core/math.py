@@ -1,8 +1,15 @@
-def multiple(x):
+def mu(x):
     """
-    multiple list of number
+     _________________________
+    < multiple list of number >
+     -------------------------
+            \   ^__^
+             \  (oo)\_______
+                (__)\       )\/\
+                    ||----w |
+                    ||     ||
     """
     if len(x) > 2:
-        return x[0] * multiple(x[1:])
+        return x[0] * mu(x[1:])
 
     return x[0] * x[1]

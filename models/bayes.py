@@ -1,4 +1,4 @@
-from core.math import multiple
+from core.math import mu
 
 
 class NaiveBayes:
@@ -24,7 +24,7 @@ class NaiveBayes:
         for i in range(self.Xy1.shape[1]):
             prob1.append(len(self.Xy1[self.Xy1[:, i] == x[i]]) / self.denom1)
 
-        prob0, prob1 = multiple(prob0), multiple(prob1)
+        prob0, prob1 = mu(prob0), mu(prob1)
 
         if prob0 > prob1:
             return 0
