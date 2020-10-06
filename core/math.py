@@ -9,7 +9,4 @@ def mu(x):
                     ||----w |
                     ||     ||
     """
-    if len(x) > 2:
-        return x[0] * mu(x[1:])
-
-    return x[0] * x[1]
+    return x[0] * mu(x[1:]) if len(x) > 2 else x[0] * x[1]

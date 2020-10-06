@@ -8,11 +8,11 @@ def p(a, b):
 
 
 class NearNeighbor:
-    def __init__(self, Xl, Yl):
-        self.Xl = Xl
-        self.Yl = Yl
+    def __init__(self, xl, yl):
+        self.Xl = xl
+        self.Yl = yl
 
     def predict(self, x):
-        f = lambda n: p(x, n)
-        dist = np.array(list(map(f, self.Xl)))
+        dist = list(map(lambda n: p(x, n), self.Xl))
+        dist = np.array(dist)
         return self.Yl[np.argmin(dist)]
