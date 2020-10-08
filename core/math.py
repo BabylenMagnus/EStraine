@@ -10,3 +10,10 @@ def mu(x):
                     ||     ||
     """
     return x[0] * mu(x[1:]) if len(x) > 2 else x[0] * x[1]
+
+
+def derivative(x, f, h=1e-3):
+    """
+    Search derivative f function in x with h scope
+    """
+    return (f(x + h) - f(x - h)) / (2 * h)
