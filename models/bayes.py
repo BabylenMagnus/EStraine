@@ -1,4 +1,5 @@
 from core.math import mu
+import numpy as np
 
 
 class NaiveBayes:
