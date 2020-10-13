@@ -17,3 +17,7 @@ def derivative(x, f, h=1e-3):
     Search derivative f function in x with h scope
     """
     return (f(x + h) - f(x - h)) / (2 * h)
+
+
+def fib(n):
+    return n if n <= 1 else fib(n - 1) + fib(n - 2)

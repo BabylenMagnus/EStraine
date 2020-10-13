@@ -46,10 +46,13 @@ class LinearClassifier:
 
         return dl * dm * df
 
-    def stochastic_gradient(self, x, y, n=1e-3):
+    def stochastic_gradient(self, x, y, n=1e-2):
         i = random.choice(range(len(x)))
         dev = self.derivative(x[i], y[i])
-        self.weight = "Думай покачто"
+        pred = self.pred(x[i])
+        error = self.error_func(self.margin((x[i], y[i])))
+
+        self.weight = self.weight - n * dev
 
     def predict(self, x):
         return int(self.pred(x) >= 0)
