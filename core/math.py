@@ -20,4 +20,19 @@ def derivative(x, f, h=1e-3):
 
 
 def fib(n):
-    return n if n <= 1 else fib(n - 1) + fib(n - 2)
+    a, b = 1, 1
+    point = 2
+    while point < n:
+        point += 1
+        a, b = b, a + b
+    return b
+
+
+def high_divisor(a, b):
+    min_ = min(a, b)
+    if not min_:
+        return 0
+    r = max(a, b) % min_
+    if r == 0:
+        return min_
+    return high_divisor(r, min_)
