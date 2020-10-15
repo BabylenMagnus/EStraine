@@ -33,6 +33,6 @@ def high_divisor(a, b):
     if not min_:
         return 0
     r = max(a, b) % min_
-    if r == 0:
+    if not r:
         return min_
     return high_divisor(r, min_)

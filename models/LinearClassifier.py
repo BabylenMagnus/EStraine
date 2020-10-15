@@ -31,12 +31,14 @@ class LinearClassifier:
         """
         df = np.ones(self.feat)
         for i in range(self.feat):
-            x1 = x.copy()
-            x2 = x.copy()
-            x1[i] = x[i] + h
-            x2[i] = x[i] - h
 
-            df[i] = (self.pred(x1) - self.pred(x2)) / (2 * h)
+            weight1 = self.weight.copy()
+            weight2 = self.weight.copy()
+
+            weight1[i] = self.weight[i] + h
+            weight2[i] = self.weight[i] - h
+
+            df[i] = (self.pred(weight1) - self.pred(weight2)) / (2 * h)
 
         x_ = self.pred(x)
         dm = (self.margin((x_ + h, y)) - self.margin((x_ - h, y))) / (2 * h)
@@ -49,9 +51,6 @@ class LinearClassifier:
     def stochastic_gradient(self, x, y, n=1e-2):
         i = random.choice(range(len(x)))
         dev = self.derivative(x[i], y[i])
-        pred = self.pred(x[i])
-        error = self.error_func(self.margin((x[i], y[i])))
-
         self.weight = self.weight - n * dev
 
     def predict(self, x):
