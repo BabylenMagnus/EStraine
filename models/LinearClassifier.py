@@ -16,10 +16,7 @@ class LinearClassifier:
     def margin(self, precedent):
         x, y = precedent
         pred = self.pred(x)
-        if y == 1:
-            return abs(y - pred) if pred >= 0 else -abs(y - pred)
-        else:
-            return abs(y - pred) if pred <= 0 else -abs(y - pred)
+        return pred * y
 
     def margin_(self, xl, yl):
         margin = list(map(self.margin, zip(xl, yl)))
