@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt
 
 
 def class2numeric(data: pd.core.frame.DataFrame):
@@ -29,3 +31,15 @@ def norm(data: pd.core.frame.DataFrame):
         data[column] = (new_data - mean) / std
 
     return data
+
+
+def visualization(X, Y, s=15, alpha=.8):
+    pca = PCA(n_components=2)
+    X = pca.fit_transform(X)
+    plt.figure(figsize=(20, 10))    # change size WxH
+    plt.scatter(X[:, 0], X[:, 1],   # draw dots for 2 vector
+                c=Y,                # colors
+                alpha=alpha, s=s,   # alpha - transparent colors, s - size of dots
+                cmap=plt.cm.get_cmap('gist_rainbow', len(np.unique(Y))))
+    plt.colorbar()
+    plt.show()

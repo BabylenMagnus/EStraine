@@ -1,4 +1,4 @@
-from core.math import mu
+from estraine.core.math import mu
 import numpy as np
 
 

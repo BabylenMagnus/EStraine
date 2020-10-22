@@ -1,3 +1,6 @@
+import numpy as np
+
+
 def mu(x):
     """
      _________________________
@@ -36,3 +39,11 @@ def high_divisor(a, b):
     if not r:
         return min_
     return high_divisor(r, min_)
+
+
+def weight_initialization(n_features, dist=0.5):
+    """
+    initializes weights between -dist and dist
+    """
+    rand = np.random.rand(n_features)
+    return rand * dist * 2 - dist

@@ -1,4 +1,5 @@
 import numpy as np
+from estraine.core.math import weight_initialization
 
 
 class SVM:
@@ -6,9 +7,8 @@ class SVM:
         self.Xl = xl
         self.Yl = yl
 
-        self.obj = len(self.Xl)
-        self.feat = self.Xl.shape[1]
-        self.weight = (np.random.rand(self.feat) / 2) - (1 / 4)
+        self.n_samples, self.n_features = self.Xl.shape
+        self.weight = weight_initialization(self.n_features)
 
         self.predict_ = lambda x: 1 if x > 0 else -1
         self.margin = lambda x, y: y * np.dot(self.weight, x)
@@ -26,8 +26,8 @@ class SVM:
         return np.array(list(pred))
 
     def fit(self, epochs=100, n=1e-3, c=1e-3, m=12):
-        for epoch in range(int(epochs * self.obj)):
-            i = np.random.randint(self.obj)
+        for epoch in range(int(epochs * self.n_samples)):
+            i = np.random.randint(self.n_samples)
             x, y = self.Xl[i], self.Yl[i]
 
             margin = self.margin(x, y)

@@ -1,12 +1,14 @@
 import numpy as np
-import random
+from estraine.core.math import weight_initialization
 
 
 class LinearClassifier:
     def __init__(self, xl, yl):
-        self.feat = xl.shape[1]
-        self.weight = (np.random.rand(self.feat) / 2) - (1 / 4)
-        self.l = xl.shape[0]
+
+        self.Xl, self.Yl = xl, yl
+        self.n_samples, self.n_features = self.Xl.shape
+        self.weight = weight_initialization(self.n_features)
+
         self.pred = lambda x: (self.weight * x).sum()
         self.pred_ = lambda x: (self.weight * x).sum(axis=1)
         self.error_func = lambda x: x ** 2 if x < 0 else 0
@@ -26,8 +28,8 @@ class LinearClassifier:
         """
         derivative fi(x) for chain rule
         """
-        df = np.ones(self.feat)
-        for i in range(self.feat):
+        df = np.ones(self.n_features)
+        for i in range(self.n_features):
 
             weight1 = self.weight.copy()
             weight2 = self.weight.copy()
@@ -45,9 +47,9 @@ class LinearClassifier:
 
         return dl * dm * df
 
-    def stochastic_gradient(self, x, y, n=1e-2):
-        i = random.choice(range(len(x)))
-        dev = self.derivative(x[i], y[i])
+    def stochastic_gradient(self, n=1e-2):
+        i = np.random.randint(self.n_samples)
+        dev = self.derivative(self.Xl[i], self.Yl[i])
         self.weight = self.weight - n * dev
 
     def predict(self, x):
