@@ -4,7 +4,7 @@ from estraine.core.convert_data import class2numeric, norm
 import numpy as np
 
 
-data = pd.read_csv("~/Документы/EStraine/data/mushrooms.csv")
+data = pd.read_csv("/data/mushrooms.csv")
 data = class2numeric(data)
 data['bias'] = 1
 Y = data['class']
